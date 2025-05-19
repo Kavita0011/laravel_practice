@@ -4,7 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
-
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,6 +16,12 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+// Authentication routes
+Route::post('/login', [LoginController::class, 'login'])->name('login');
+Route::post('/register', [RegisterController::class, 'register'])->name('register');
+
+
+// dashboard
 Route::middleware('auth:sanctum')->group(function () {
     // Dashboard data (optional, could be a JSON response)
     Route::get('/dashboard', function (Request $request) {
@@ -27,5 +34,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy']);
 
     // Posts CRUD routes
-    Route::apiResource('posts', PostController::class);
+    // Route::resource('/posts', [PostController::class]);
+    // Route::apiResource('/posts', [PostController::class, 'store']);
+    // add more routes here
 });
