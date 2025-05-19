@@ -49,5 +49,31 @@ class LoginController extends Controller
             'user' => $user
         ], 200);
     }
+    // logout
+    /**
+     * Logout the user (Invalidate the token)
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function logout(Request $request)
+    {
+    
+        // get token
+        $token = $request->user()->currentAccessToken();
+        // check if the token is valid
+        if (!$token) {
+            return response()->json([
+                'status' => false,
+                'message' => 'Token not found.'
+            ], 404);
+        }
+    // delete token
+        // delete the token
+        $token->delete();
+        return response()->json([
+            'status' => true,
+            'message' => 'Logout successful.'
+        ], 200);}
 
 }

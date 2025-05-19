@@ -19,7 +19,7 @@ Route::get('/user', function (Request $request) {
 // Authentication routes
 Route::post('/login', [LoginController::class, 'login'])->name('login');
 Route::post('/register', [RegisterController::class, 'register'])->name('register');
-
+Route::middleware('auth:sanctum')->post('/logout', [LoginController::class, 'logout'])->name('logout');
 
 // dashboard
 Route::middleware('auth:sanctum')->group(function () {

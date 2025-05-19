@@ -43,4 +43,5 @@ class RegisterController extends Controller
             'user' => $user
         ], 201);
     }
+    
 }
