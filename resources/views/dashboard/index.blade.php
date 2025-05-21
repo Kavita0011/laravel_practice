@@ -10,6 +10,8 @@
     <div id="dashboard-data" class="mt-4 alert alert-info">
       Loading user data...
     </div>
+    <div class="mt-4">
+      <button class="btn btn-danger" onclick="logout()"><a href={{route('logout')}}>Logout</a></button>
   </div>
 @endsection
 @section('scripts')
@@ -19,7 +21,13 @@
     });
 
     function fetchUserData() {
-      fetch('/api/dashboard')
+      fetch('/dashboard/members', {
+          method: 'GET',
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('token')}`,
+            // 'Accept': 'application/json'
+          }
+        })
         .then(response => response.json())
         .then(data => {
           const dashboardData = document.getElementById('dashboard-data');
@@ -29,24 +37,21 @@
           `;
         })
         .catch(error => {
-          console.error('Error fetching user data:', error);
+          console.log('Error fetching user data:', error);
         });
     }
   document.addEventListener('DOMContentLoaded', function () {
     const token = localStorage.getItem("token") 
     // || '13|jq8K0eYmeWhRdqpYj6Wdokwpetb2uAI1PhY9ajhj62f3e0a1';
 
-    fetch("http://127.0.0.1:8000/api/dashboard", {
+    fetch("http://127.0.0.1:8000/dashboard", {
       method: "GET",
       headers: {
         "Authorization": `Bearer ${token}`,
-        "Accept": "application/json"
+        // "Accept": "application/json"
       }
     })
     .then(response => {
-      if (!response.ok) {
-        throw new Error("Token expired or unauthorized");
-      }
       return response.json();
     })
     .then(data => {
@@ -61,7 +66,8 @@
 
   function logout() {
     localStorage.removeItem("token");
-    // window.location.href = "/api/login";
+    localStorage.removeItem("user");
+    window.location.href =route('logout');
   }
 </script>
 

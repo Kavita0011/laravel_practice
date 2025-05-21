@@ -39,5 +39,38 @@
   </div>
 </div>
 <?php $__env->stopSection(); ?>
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const token = localStorage.getItem("token") 
+    // || '13|jq8K0eYmeWhRdqpYj6Wdokwpetb2uAI1PhY9ajhj62f3e0a1';
+
+    fetch("http://127.0.0.1:8000/dashboard/createmembers", {
+      method: "GET",
+      headers: {
+        "Authorization": `Bearer ${token}`,
+        "Accept": "application/json"
+      }
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error("Token expired or unauthorized");
+      }
+      return response.json();
+    })
+    .then(data => {
+      document.getElementById("user-name").innerText = data.user.name;
+    })
+    .catch(err => {
+      alert(err.message);
+    //   localStorage.removeItem("token");
+    //   window.location.href = "/api/login"; // adjust if your login route is different
+    });
+  });
+
+  function logout() {
+    localStorage.removeItem("token");
+    window.location.href = "/api/login";
+  }
+</script>
 
 <?php echo $__env->make('admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\LENOVO\OneDrive\Desktop\EverGreen Brain\laravel_practice\laravel\resources\views/dashboard/createmember.blade.php ENDPATH**/ ?>

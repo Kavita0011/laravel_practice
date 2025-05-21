@@ -8,7 +8,7 @@
   <ul class="navbar-nav ms-auto">
     <li class="nav-item dropdown">
       <a id="userDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
-        <span id="user-name">Loading...</span>
+        <span id="user-name"></span>
       </a>
       <div class="dropdown-menu dropdown-menu-end">
         <a class="dropdown-item" href="#" onclick="logout()">Logout</a>
@@ -17,4 +17,24 @@
   </ul>
 </nav>
 
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const userData = localStorage.getItem('user');
+    if (userData) {
+      try {
+        const user = JSON.parse(userData);
+        document.getElementById('user-name').textContent = user.name || 'User';
+      } catch (e) {
+        console.error('Error parsing user data from localStorage', e);
+        document.getElementById('user-name').textContent = 'User';
+      }
+    } else {
+      document.getElementById('user-name').textContent = 'User';
+    }
+  });
+    function logout() {
+    localStorage.clear();
+    window.location.href = '/login'; // Redirect to login page
+  }
+</script>
 <?php /**PATH C:\Users\LENOVO\OneDrive\Desktop\EverGreen Brain\laravel_practice\laravel\resources\views/partials/navbar.blade.php ENDPATH**/ ?>

@@ -54,7 +54,7 @@
     const token = localStorage.getItem("token") 
     // || '13|jq8K0eYmeWhRdqpYj6Wdokwpetb2uAI1PhY9ajhj62f3e0a1';
 
-    fetch("http://127.0.0.1:8000/api/dashboard", {
+    fetch("http://127.0.0.1:8000/dashboard/members", {
       method: "GET",
       headers: {
         "Authorization": `Bearer ${token}`,

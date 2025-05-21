@@ -31,9 +31,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
     // Dashboard
-    // Route::get('/dashboard', function () {
-    //     return response()->json(['message' => 'Dashboard data here']);
-    // });
+    Route::get('/dashboard', function () {
+        return response()->json(['message' => 'Dashboard data here']);
+    });
 
     // Member CRUD
     // Route::apiResource('members', MemberController::class);

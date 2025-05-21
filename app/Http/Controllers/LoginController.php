@@ -47,7 +47,7 @@ class LoginController extends Controller
         // Check if user is active
         // Generate token
         $token = $userloggedin->createToken('API Token')->plainTextToken;
-
+ 
         return response()->json([
             'status' => true,
             'message' => 'Login successful.',

@@ -9,11 +9,11 @@ class MemberController extends Controller
 // List all members
     public function index()
 {
-    // dd('hello');
     $members = Member::all();  // Fetch all members from DB
     // dd('hello');
     return view('dashboard.memberslist', compact('members')); // Pass it to the view
 }
+// show login
 // Show form to create member
     public function create()
     {

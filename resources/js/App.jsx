@@ -1,16 +1,18 @@
+// resources/js/app.jsx
+import '../css/app.css';
+import './bootstrap';
+// import { Ziggy } from './ziggy'; // adjust path if different
+// import route from 'ziggy-js';
 
-import React from "react";
-import { createRoot } from "react-dom/client";
-// import App from "./app";
-import Members from "./Pages/MemberList";
-import Login from "./Pages/login";
-import Dashboard from "./Pages/Dashboard";
-// import Dashboard from "./Pages/Dashboard";
 
-const container = document.getElementById("app");
-const root = createRoot(container);
-root.render(<Dashboard />);
-// This code imports React and the createRoot function from the react-dom/client package. It also imports the App component from the App module. It then selects the HTML element with the ID "app" and creates a root for rendering the App component into that element.
-// The createRoot function is used to create a root for the React application, and the render method is called to render the App component into the selected container. This is a common pattern for initializing a React application in a web page.
+import { createRoot } from 'react-dom/client';
+import { createInertiaApp } from '@inertiajs/react';
+import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
 
-// export default App;
+createInertiaApp({
+  resolve: (name) =>
+    resolvePageComponent(`./Pages/${name}.jsx`, import.meta.glob('./Pages/**/*.jsx')),
+  setup({ el, App, props }) {
+    createRoot(el).render(<App {...props} />);
+  },
+});

@@ -7,21 +7,15 @@
     <nav class="mt-2">
       <ul class="nav nav-pills nav-sidebar flex-column">
         <li class="nav-item">
-          <a href="{{ url('/admin/dashboard') }}" class="nav-link">
+          <a href="{{ url('/dashboard') }}" class="nav-link">
             <i class="nav-icon fas fa-home"></i>
             <p>Dashboard</p>
           </a>
         </li> 
         <li class="nav-item">
-          <a href="{{ url('/admin/members') }}" class="nav-link">
+          <a href="{{ url('/dashboard/members') }}" class="nav-link">
             <i class="nav-icon fas fa-user"></i>
-            <p>memberlist</p>
-          </a>
-        </li>
-         <li class="nav-item">
-          <a href="{{ url('/admin/createmember') }}" class="nav-link">
-            <i class="nav-icon fas fa-user"></i>
-            <p>create member</p>
+            <p>Member</p>
           </a>
         </li>
       </ul>
