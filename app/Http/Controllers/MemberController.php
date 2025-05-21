@@ -6,13 +6,22 @@ use Illuminate\Http\Request;
 
 class MemberController extends Controller
 {
+// List all members
     public function index()
+{
+    // dd('hello');
+    $members = Member::all();  // Fetch all members from DB
+    // dd('hello');
+    return view('dashboard.memberslist', compact('members')); // Pass it to the view
+}
+// Show form to create member
+    public function create()
     {
-        return Member::all();
+        return view('dashboard.createmember'); // Return the view for creating a member
     }
-
     public function store(Request $request)
     {
+        // Validate incoming data
         $request->validate([
             'name' => 'required|string',
             'medicaid_id' => 'required|unique:members',

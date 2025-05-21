@@ -1,25 +1,34 @@
 import { useState } from "react";
-import axios from "axios";
+import axios from "axios"; // Import your Axios instance
 import { useNavigate } from "react-router-dom";
 
-export default function Login() {
+function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
-  const navigate = useNavigate();
+//   const navigate = useNavigate();
 
   const handleLogin = async () => {
-    try {
-      const res = await axios.post("/api/login", {
-        email: email,
-        password: password,
-      });
-      localStorage.setItem("token", res.data.token);
-      setMessage("Login successful");
+  try {
+  const res = await axios.post("/api/login", { email, password });
+  const token = res.data.token;
+
+  if (token) {
+    localStorage.setItem("token", token);
+    setMessage("Login successful");
+
+    // Redirect after a short delay (optional)
+    setTimeout(() => {
       navigate("/dashboard");
-    } catch (error) {
-      setMessage(error.response?.data?.message || "Login failed");
-    }
+    }, 1000); // 1 second delay
+
+  } else {
+    setMessage("Token not received from backend");
+  }
+
+} catch (error) {
+  setMessage(error.response?.data?.message || "Login failed");
+}
   };
 
   return (
@@ -41,5 +50,4 @@ export default function Login() {
     </div>
   );
 }
-// // This code defines a simple login component using React. It uses the useState hook to manage the email, password, and message states. When the user clicks the login button, it sends a POST request to the /api/login endpoint with the email and password. If successful, it stores the token in local storage and navigates to the dashboard page. If it fails, it sets an error message.
-// // The component also includes input fields for the email and password, and a button to trigger the login process. The message state is used to display feedback to the user regarding the login status.
+export default Login;

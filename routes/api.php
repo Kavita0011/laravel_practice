@@ -23,7 +23,7 @@ Route::post('/register', [RegisterController::class, 'register'])->name('registe
 Route::middleware('auth:sanctum')->group(function () {
 
     // Authenticated User Info
-    Route::get('/me', function (Request $request) {
+    Route::get('/usermembers', function (Request $request) {
         return response()->json($request->user());
     });
 
@@ -31,12 +31,12 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 
     // Dashboard
-    Route::get('/dashboard', function () {
-        return response()->json(['message' => 'Dashboard data here']);
-    });
+    // Route::get('/dashboard', function () {
+    //     return response()->json(['message' => 'Dashboard data here']);
+    // });
 
     // Member CRUD
-    Route::apiResource('members', MemberController::class);
+    // Route::apiResource('members', MemberController::class);
 
     // Profile
     Route::get('/profile', [ProfileController::class, 'edit']);

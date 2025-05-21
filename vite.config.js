@@ -6,7 +6,7 @@ export default defineConfig({
     plugins: [
         laravel({
             // custom changes by kavita
-            input: 'resources/js/app1.jsx',
+            input: 'resources/js/App.jsx',
             refresh: true,
         }),
         react(),

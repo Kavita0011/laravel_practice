@@ -20,4 +20,5 @@ class Member extends Model
     'admission_date',
     'discharge_date',
 ];
+
 }
